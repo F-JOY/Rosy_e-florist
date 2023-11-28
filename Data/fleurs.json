@@ -1,0 +1,71 @@
+[
+    {
+      "id": 1,
+      "nom": "Jasmin",
+      "discr": "Facile d’entretien, le jasmin est un séduisant arbuste grimpant à la magnifique floraison estivale blanche ou jaune qui exhale un doux parfum.",
+      "image": "/image/jasmin.jpg"
+    },
+    {
+      "id": 2,
+      "nom": "Lys",
+      "discr": "Le lys, symbole de la pureté et de l'élégance, offre des fleurs majestueuses aux couleurs variées. Sa floraison abondante apporte une touche de sophistication à tous les jardins.",
+      "image": "/image/lys.jpg"
+    },
+    {
+      "id": 3,
+      "nom": "Tulipe",
+      "discr": "Les tulipes, avec leur variété infinie de couleurs et de formes, évoquent le renouveau du printemps. Leur floraison spectaculaire crée un véritable festival de couleurs dans les jardins.",
+      "image": "/image/tulipe.jpg"
+    },
+    {
+      "id": 4,
+      "nom": "Rose",
+      "discr": "La rose, reine des fleurs, est un symbole intemporel d'amour et de beauté. Disponible dans une palette infinie de couleurs, elle offre une variété de parfums et de formes, s'adaptant à tous les goûts.",
+      "image": "/image/rose.jpg"
+    },
+    {
+      "id": 5,
+      "nom": "Orchidée",
+      "discr": "L'orchidée, avec sa beauté délicate et exotique, symbolise l'amour, la beauté et la force. Disponible dans une variété de couleurs et de formes, elle apporte une touche d'élégance à tout espace.",
+      "image": "/image/orchidee.jpg"
+    },
+    {
+      "id": 6,
+      "nom": "Marguerite",
+      "discr": "La marguerite, avec ses pétales blancs purs et son cœur jaune vif, incarne l'innocence et la simplicité. Elle est parfaite pour ajouter une touche de fraîcheur aux jardins et aux bouquets.",
+      "image": "/image/marguerite.jpg"
+    },
+    {
+      "id": 7,
+      "nom": "Jonquille",
+      "discr": "La jonquille, symbole du printemps, offre des fleurs jaunes vives qui évoquent la joie et la vitalité. Sa floraison précoce annonce le réveil de la nature après l'hiver.",
+      "image": "/image/jonquille.jpg"
+    },
+    {
+      "id": 8,
+      "nom": "Freesia",
+      "discr": "Le freesia, connu pour son parfum enivrant, offre des grappes de fleurs délicates dans une gamme de couleurs pastel. Il ajoute une touche romantique aux bouquets et aux jardins.",
+      "image": "/image/freesia.jpg"
+    },
+    {
+      "id": 9,
+       "nom": "Dahlia",
+      "discr": "Le dahlia, avec ses fleurs grandes et colorées, est une véritable star du jardin. Disponible dans une multitude de formes et de tailles, il offre une explosion de couleurs tout au long de l'été.",
+      "image": "/image/dahlia.jpg"
+     
+    },
+    {
+      "id": 10,
+      "nom": "Lavande",
+      "discr": "La lavande, avec son parfum apaisant et ses fleurs violettes en épis, est appréciée pour ses propriétés aromatiques et médicinales. Elle crée une ambiance relaxante dans les jardins et les bouquets séchés.",
+      "image": "/image/lavande.jpg"
+    },
+    {
+        "id": 11,
+        "nom": "Pivoine",
+        "discr": "La pivoine, avec ses pétales doux et volumineux, symbolise la richesse et la prospérité. Sa floraison somptueuse crée une atmosphère romantique et élégante dans les jardins et les arrangements floraux.",
+        "image": "/image/pivoine.jpg"
+      }
+   
+  ]
+  

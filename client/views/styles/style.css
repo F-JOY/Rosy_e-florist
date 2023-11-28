@@ -1,0 +1,130 @@
+.footer-divider {
+    border-top: 1px solid #d959a4;
+}
+.bg-color{
+    background-color:rgb(245, 240, 243);
+}
+.btn-color{
+    background-color:rgb(254,202,232);
+    padding: 10px 20px;
+    margin: 10px; 
+     border: 2px solid rgb(245, 240, 243); 
+     color: #333;
+     font-size: 16px; 
+     font-weight: bold; 
+    border-radius: 5px; 
+     transition: background-color 0.3s, color 0.3s, border-color 0.3s; 
+
+}
+.btn-color:hover{
+    background-color: transparent;
+     color: rgb(254,202,232); 
+    border-color: #ff69b4; 
+}
+.btn-liked{
+    background-color: transparent;
+    padding: 10px 20px;
+    margin: 10px; 
+     border: 2px solid rgb(245, 240, 243); 
+     color: #fecae8; 
+     font-size: 16px; 
+     font-weight: bold; 
+    border-radius: 5px; 
+    border-color: #ff69b4; 
+     transition: background-color 0.3s, color 0.3s, border-color 0.3s; 
+}
+
+.logoform{
+    height: 50px;
+   width: 150px;
+}
+.soustitre{
+    display: inline-block;
+    background-color: rgb(237, 233, 233,0.5);
+    font-weight: 400;
+   padding-left: 5px;
+   padding-right: 5px;
+    border-radius: 5px;
+   
+}
+.card-image{
+ height: 300px;
+ width: auto;
+}
+.likeIcon:hover{
+    color: #ff69b4;
+  
+}
+.likedIcon{
+    
+    color:red;
+}
+.avis-card {
+    border: 1px solid #ddd; /* Adds a thin border to the card */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .avatar-container {
+    padding: 8px; /* Adjust the padding for spacing */
+    box-sizing: border-box; /* Ensure padding is included in the width */
+  }
+  
+  .line {
+    width: 100%;
+   
+    border-top: 10px solid #d959a4; /* Adds a horizontal line above and below the avatar */
+  }
+  
+  .commentaire {
+    padding: 16px;
+  }
+  .section-devider{
+    
+    height: 60px;
+  }
+  .itemAdded{
+    color: rgb(11, 11, 248);
+  }
+  /* Add this to your CSS file or style section in your React component */
+
+.cart-container {
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  width: 80%;
+}
+
+.cart-items {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  width: 202px;
+
+
+}
+/* Add this to your CSS file or style section in your React component */
+
+
+
+.remove-button {
+  color: rgb(238, 230, 230);
+  background-color: red;
+  font-size: larger;
+  border-color: red;
+
+  
+}
+
+.item-image{
+  height: 200px;
+  width: 200px;
+  border-radius: 10px;
+
+
+}
+
+  
+  

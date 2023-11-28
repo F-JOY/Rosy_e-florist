@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "nom": "Bouquet de Tunis",
+    "descr": "Un dosage parfait de jasmins et de tulipes, des couleurs éclatantes et du soleil toute l'année chez vous",
+    "image": "http://localhost:5000/images/Btulipe.jpg",
+    "prix": "1500.00",
+    "like": false,
+    "nbLike": 0
+  },
+  {
+    "id": 2,
+    "nom": "Bouquet d'Alger",
+    "descr": "Un dosage parfait de jasmins et de senteurs méditerranéennes, des odeurs éclatantes pour égayer votre bureau",
+    "image": "http://localhost:5000/images/Bjasmin.jpg",
+    "prix": "2000.00",
+    "like": false,
+    "nbLike": 0
+  },
+  {
+    "id": 3,
+    "nom": "Bouquet d'Oran",
+    "descr": "Un mélange merveilleux de roses et de lys, des odeurs et des couleurs qui exhalent un doux parfum.",
+    "image": "http://localhost:5000/images/blys.jpg",
+    "prix": "2000.00",
+    "like": false,
+    "nbLike": 0
+  },
+  {
+    "id": 4,
+    "nom": "Bouquet d'Oran",
+    "descr": "Un mélange merveilleux de roses et de lys, des odeurs et des couleurs qui exhalent un doux parfum.",
+    "image": "http://localhost:5000/images/blys.jpg",
+    "prix": "2000.00",
+    "like": false,
+    "nbLike": 0
+  },
+  {
+    "id": 5,
+    "nom": "Bouquet d'Oran",
+    "descr": "Un mélange merveilleux de roses et de lys, des odeurs et des couleurs qui exhalent un doux parfum.",
+    "image": "http://localhost:5000/images/blys.jpg",
+    "prix": "2000.00",
+    "like": false,
+    "nbLike": 0
+  }
+]

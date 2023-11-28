@@ -1,0 +1,74 @@
+[
+    {
+      "id": 0,
+      "nom": "Bouquet de Tunis",
+      "descr": "Un dosage parfait de jasmins et de tulipes, des couleurs éclatantes et du soleil toute l'année chez vous",
+      "image": "/image/Btulipe.jpg",
+      "prix": "1500.00",
+      "like": false,
+      "nbLike": 0
+    },
+    {
+      "id": 1,
+      "nom": "Bouquet d'Alger",
+      "descr": "Un dosage parfait de jasmins et de senteurs méditerranéennes, des odeurs éclatantes pour égayer votre bureau",
+      "image": "/image/Bjasmin.jpg",
+      "prix": "2000.00",
+      "like": false,
+      "nbLike": 0
+    },
+    {
+      "id": 2,
+      "nom": "Bouquet d'Oran",
+      "descr": "Un mélange merveilleux de roses et de lys, des odeurs et des couleurs qui exhalent un doux parfum.",
+      "image": "/image/blys.jpg",
+      "prix": "2000.00",
+      "like": false,
+      "nbLike": 0
+    },
+    {
+      "id": 3,
+    "nom": "Bouquet de TourneSols",
+    "descr": "Un bouquet lumineux de tournesols pour apporter de la joie et de la chaleur à votre journée.",
+    "image": "/image/bjaune.jpg",
+    "prix": "2500.00",
+    "like": false,
+      "nbLike": 0
+    },
+    {
+      "id": 4,
+      "nom": "Bouquet de Printemps",
+      "descr": "Un mélange coloré de tulipes, jonquilles et autres fleurs de printemps. Parfait pour célébrer la saison.",
+      "image": "/image/printemps.jpg",
+      "prix": "1500.00",
+      "like": false,
+      "nbLike": 0
+    },
+    {
+      "id": 5,
+      "nom": "Bouquet Romantique",
+      "descr": "Des roses rouges, des pivoines et des feuilles d'eucalyptus pour créer une ambiance romantique et élégante.",
+      "image": "/image/Bromantique.jpg",
+      "prix": "1800.00",
+      "like": false,
+      "nbLike": 0
+    }, {
+      "id": 6,
+      "nom": "Bouquet d'Hiver",
+      "descr": "Une sélection chaleureuse de fleurs d'hiver, comme des amaryllis et des branches de pin, pour apporter la chaleur pendant les jours froids.",
+      "image": "/image/Bhiver.png",
+      "prix": "1700.00",
+      "like": false,
+      "nbLike": 0
+    },
+    {
+      "id": 7,
+      "nom": "Bouquet Exotique",
+      "descr": "Une combinaison exotique de fleurs tropicales, idéale pour apporter une touche de paradis à n'importe quelle occasion.",
+      "image": "/image/exotique.jpg",
+      "prix": "2200.00",
+      "like": false,
+      "nbLike": 0
+    }
+  ]
+  
