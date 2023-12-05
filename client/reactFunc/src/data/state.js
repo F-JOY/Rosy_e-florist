@@ -18,7 +18,7 @@ export  const state={
         {
           id: 4,
           path: "/compte",
-          label: "Mon Compt",
+          label: "Mon Compte",
         },
       ],
       slides: [

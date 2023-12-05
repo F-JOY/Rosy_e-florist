@@ -1,6 +1,28 @@
 const express = require("express");
 const path = require("path");
 const app = express();
+///////////Connexion BD///////////////////////////
+const { Users, Fleurs, Bouquets, sequelize } = require('./models');
+const insertData = require('./insertData');
+const authenticateDatabase = async () => {
+  try {
+    await sequelize.authenticate();
+    console.log('Connection has been established successfully.');
+
+    // Synchroniser la base de données
+    await sequelize.sync({ force: false });
+    console.log('Tables synchronisées.');
+
+    // Insérer des données
+    await insertData();
+    console.log('Données de test insérées avec succès.');
+  } catch (error) {
+    console.error('Unable to connect to the database:', error);
+  }
+};
+authenticateDatabase();
+
+//////////////////////////////
 
 //for auto reloading on the browser
 const livereload = require("livereload");
@@ -31,18 +53,35 @@ app.use(express.static(path.join(__dirname, '../client/reactFunc/build')));
 
 app.get("/", (req, res) => {
  // res.sendFile(path.join(__dirname,'../client/views/indexBS.html'))
-  res.sendFile(path.join(__dirname, '../client/reactClass/build', 'index.html'));
+  //res.sendFile(path.join(__dirname, '../client/reactClass/build', 'index.html'));
  // res.sendFile(path.join(__dirname, '../client/reactFunc/build', 'index.html'));
   
 });
 
 ////////////API for react app function version//////////
+
 const Data = require("../client/reactFunc/src/data/mesBouquets.json");
 app.get("/api/bouquets", (req, res) => {
   res.json(Data);
   console.log("Réponse envoyée avec le code :", res.statusCode);
 });
 
+////////////////SEND SQLITE DATA///////////////////////
+app.get("/api/getBouquets", (req, res) => {
+  // Récupérer tous les bouquets depuis la base de données
+  Bouquets.findAll()
+    .then(bouquets => {
+      // Envoyer les bouquets en tant que réponse JSON
+      res.json(bouquets);
+      console.log("Réponse envoyée avec le code :", res.statusCode);
+    })
+    .catch(error => {
+      // Gérer les erreurs
+      console.error('Erreur lors de la récupération des bouquets depuis la base de données:', error);
+      res.status(500).json({ error: 'Erreur lors de la récupération des bouquets depuis la base de données' });
+    });
+});
+//////////////////////////////////////////////////////////
 app.put("/api/bouquets/like/:id", (req, res) => {
   const bouquetId = parseInt(req.params.id);
   const newBouquet = Data.find((bouquet) => bouquet.id === bouquetId);
@@ -59,6 +98,7 @@ app.put("/api/bouquets/like/:id", (req, res) => {
 
 
 //////////////API for react app Class version///////////////
+/*
 const bouquet = require("../Data/bouquets.json");
 app.get("/api/getBouquets", (req, res) => {
   res.json(bouquet);
@@ -68,7 +108,7 @@ const fleurs = require("../Data/fleurs.json");
 app.get("/api/fleurs", (req, res) => {
   res.json(fleurs);
   console.log("Réponse envoyée avec le code :", res.statusCode);
-});
+});*/
 app.put('/api/like', (req, res) => {
   const bouquetId = parseInt(req.query.bouquetId);
   const bouquetaModifier = bouquet.find(b => b.id === bouquetId);
