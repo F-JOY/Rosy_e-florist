@@ -1,8 +1,10 @@
 const express = require("express");
 const path = require("path");
 const app = express();
-///////////Connexion BD///////////////////////////
 const { Users, Fleurs, Bouquets, sequelize } = require('./models');
+
+///////////Connexion BD///////////////////////////
+
 const insertData = require('./insertData');
 const authenticateDatabase = async () => {
   try {
@@ -21,9 +23,7 @@ const authenticateDatabase = async () => {
   }
 };
 authenticateDatabase();
-
-//////////////////////////////
-
+/*
 //for auto reloading on the browser
 const livereload = require("livereload");
 const connectLivereload = require("connect-livereload");
@@ -32,7 +32,7 @@ const liveReloadServer = livereload.createServer();
 liveReloadServer.watch(path.join(__dirname, "app.js"));
 liveReloadServer.watch(path.join(__dirname, "../client/views"));
 liveReloadServer.watch(path.join(__dirname, "../client/views/styles"));
-app.use(connectLivereload());
+app.use(connectLivereload());*/
 /////////////////cors methode request from client 3000 to server 5000/////////////////////////
 const cors = require('cors');
 app.use(cors());
@@ -66,17 +66,14 @@ app.get("/api/bouquets", (req, res) => {
   console.log("Réponse envoyée avec le code :", res.statusCode);
 });
 
-////////////////SEND SQLITE DATA///////////////////////
+////////////////API to SEND DATA fome SQLITE DBase///////////////////////
 app.get("/api/getBouquets", (req, res) => {
-  // Récupérer tous les bouquets depuis la base de données
   Bouquets.findAll()
     .then(bouquets => {
-      // Envoyer les bouquets en tant que réponse JSON
       res.json(bouquets);
       console.log("Réponse envoyée avec le code :", res.statusCode);
     })
     .catch(error => {
-      // Gérer les erreurs
       console.error('Erreur lors de la récupération des bouquets depuis la base de données:', error);
       res.status(500).json({ error: 'Erreur lors de la récupération des bouquets depuis la base de données' });
     });

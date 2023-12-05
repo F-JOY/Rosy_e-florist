@@ -8,7 +8,7 @@ const insertData = async () => {
     ]);
 
     await sequelize.models.Bouquets.bulkCreate([
-      { nom: 'Bouquet joie', descr:'etre ta joie c est ce que je voulais ',prix:5000.00,image:'http://localhost:5000/image/Bromantique.jpg' },
+      { nom: 'Bouquet joie', descr:'étre ta joie c est ce que je voulais ',prix:5000.00,image:'http://localhost:5000/image/Bromantique.jpg' },
       { nom: 'Bouquet Rayons de bonheur', descr:'je te doit le bonheur',prix:4000.00,image:'http://localhost:5000/images/Bjasmin.jpg' },
       
     ]);

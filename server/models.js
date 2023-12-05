@@ -1,4 +1,4 @@
-// models.js
+
 const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = new Sequelize({
   dialect: 'sqlite',
@@ -90,9 +90,5 @@ Bouquets.belongsToMany(Users, { through: 'UserLikes' });
 Bouquets.belongsToMany(Fleurs, { through: 'contientFleur' });
 Fleurs.belongsToMany(Bouquets, { through: 'contientFleur' });
 
-// Synchronisation avec la base de données
-sequelize.sync({ force: false }).then(() => {
-  console.log('Tables synchronisées');
-});
 
 module.exports = { Users, Fleurs, Bouquets,sequelize };
