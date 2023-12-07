@@ -15,7 +15,7 @@ export default class Bouquet extends Component {
   handleLike = () => {
     const { bouquet } = this.props;
 
-    fetch(`/api/like?bouquetId=${bouquet.id}`, {
+    fetch(`/api/like/${bouquet.id}`, {
       method: "PUT",
     });
     this.setState((prevState) => ({

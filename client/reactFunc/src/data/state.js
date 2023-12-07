@@ -4,21 +4,25 @@ export  const state={
           id: 1,
           path: "/",
           label: "Accueil",
+          isCmpt: false,
         },
         {
           id: 2,
           path: "/bouquets",
           label: "Bouquets",
+          isCmpt: false,
         },
         {
           id: 3,
           path: "/fleurs",
           label: "Fleurs",
+          isCmpt: false,
         },
         {
           id: 4,
           path: "/compte",
           label: "Mon Compte",
+          isCmpt: true,
         },
       ],
       slides: [

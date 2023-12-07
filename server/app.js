@@ -1,8 +1,9 @@
 const express = require("express");
 const path = require("path");
 const app = express();
-const { Users, Fleurs, Bouquets, sequelize } = require('./models');
 
+const { Users, Fleurs, Bouquets, sequelize } = require('./models');
+const {Op}=require("sequelize")
 ///////////Connexion BD///////////////////////////
 
 const insertData = require('./insertData');
@@ -23,16 +24,7 @@ const authenticateDatabase = async () => {
   }
 };
 authenticateDatabase();
-/*
-//for auto reloading on the browser
-const livereload = require("livereload");
-const connectLivereload = require("connect-livereload");
-const liveReloadServer = livereload.createServer();
-//liveReloadServer.watch(__dirname); to watch the whole project
-liveReloadServer.watch(path.join(__dirname, "app.js"));
-liveReloadServer.watch(path.join(__dirname, "../client/views"));
-liveReloadServer.watch(path.join(__dirname, "../client/views/styles"));
-app.use(connectLivereload());*/
+
 /////////////////cors methode request from client 3000 to server 5000/////////////////////////
 const cors = require('cors');
 app.use(cors());
@@ -58,16 +50,9 @@ app.get("/", (req, res) => {
   
 });
 
-////////////API for react app function version//////////
-
-const Data = require("../client/reactFunc/src/data/mesBouquets.json");
-app.get("/api/bouquets", (req, res) => {
-  res.json(Data);
-  console.log("Réponse envoyée avec le code :", res.statusCode);
-});
 
 ////////////////API to SEND DATA fome SQLITE DBase///////////////////////
-app.get("/api/getBouquets", (req, res) => {
+app.get("/api/GetBouquetsFromDB", (req, res) => {
   Bouquets.findAll()
     .then(bouquets => {
       res.json(bouquets);
@@ -78,24 +63,50 @@ app.get("/api/getBouquets", (req, res) => {
       res.status(500).json({ error: 'Erreur lors de la récupération des bouquets depuis la base de données' });
     });
 });
-//////////////////////////////////////////////////////////
-app.put("/api/bouquets/like/:id", (req, res) => {
-  const bouquetId = parseInt(req.params.id);
-  const newBouquet = Data.find((bouquet) => bouquet.id === bouquetId);
-  if (newBouquet) {
-    newBouquet.like = !newBouquet.like;
-    res.json({
-      message: 'Valeur "like" mise à jour pour le bouquet ID ' + bouquetId,
-      bouquet:newBouquet
+app.get("/api/GetFleursFromDB", (req, res) => {
+  Fleurs.findAll()
+    .then(fleurs => {
+      res.json(fleurs);
+      console.log("Réponse envoyée avec le code :", res.statusCode);
+    })
+    .catch(error => {
+      console.error('Erreur lors de la récupération des fleurs depuis la base de données:', error);
+      res.status(500).json({ error: 'Erreur lors de la récupération des fleurs depuis la base de données' });
     });
-  } else {
-    res.status(404).json({ error: "Bouquet non trouvé" });
-  }
+});
+app.get("/api/GetUsersFromDB", (req, res) => {
+  Users.findAll()
+    .then(users => {
+      res.json(users);
+      console.log("Réponse envoyée avec le code :", res.statusCode);
+    })
+    .catch(error => {
+      console.error('Erreur lors de la récupération des users depuis la base de données:', error);
+      res.status(500).json({ error: 'Erreur lors de la récupération des users depuis la base de données' });
+    });
+});
+////////////////////////Get user by Login/////////////////
+app.get("/api/GetUserByLogin/:login", (req, res) => {
+  const userLogin = req.params.login;
+  Users.findOne({
+    where: { login: 'user1' }
+  })
+    .then(user => {
+      if (user) {
+        res.json(user);
+        console.log("Réponse envoyée avec le code :", res.statusCode);
+      } else {
+        res.status(404).json({ error: 'Utilisateur non trouvé' });
+      }
+    })
+    .catch(error => {
+      console.error('Erreur lors de la récupération de l\'utilisateur depuis la base de données:', error);
+      res.status(500).json({ error: 'Erreur lors de la récupération de l\'utilisateur depuis la base de données' });
+    });
 });
 
 
-//////////////API for react app Class version///////////////
-/*
+
 const bouquet = require("../Data/bouquets.json");
 app.get("/api/getBouquets", (req, res) => {
   res.json(bouquet);
@@ -105,22 +116,67 @@ const fleurs = require("../Data/fleurs.json");
 app.get("/api/fleurs", (req, res) => {
   res.json(fleurs);
   console.log("Réponse envoyée avec le code :", res.statusCode);
-});*/
+});
+/*
 app.put('/api/like', (req, res) => {
   const bouquetId = parseInt(req.query.bouquetId);
   const bouquetaModifier = bouquet.find(b => b.id === bouquetId);
   if (bouquetaModifier) {
     bouquetaModifier.like = !bouquetaModifier.like ;
     
-     console.log("bouquet modifier avec succés")
+     console.log("bouquet modifier avec succés  "+bouquetId)
   } else {
     console.log(req.query.bouquetId)
     console.log("bouquet non trouver");
   }
 });
-
-
+*/
+app.put('/api/like/:bouquetId', (req, res) => {
+  const bouquetId = parseInt(req.params.bouquetId);
+  const bouquetaModifier = bouquet.find(b => b.id === bouquetId);
+  if (bouquetaModifier) {
+    bouquetaModifier.like = !bouquetaModifier.like;
+    
+    console.log("Bouquet modifié avec succès : " + bouquetId);
+    res.status(200).send("Bouquet modifié avec succès");
+  } else {
+    console.log("Bouquet non trouvé : " + bouquetId);
+    res.status(404).send("Bouquet non trouvé");
+  }
+});
 
 app.listen(5000, () => {
   console.log("listen on port " + 5000);
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+//for auto reloading on the browser
+const livereload = require("livereload");
+const connectLivereload = require("connect-livereload");
+const liveReloadServer = livereload.createServer();
+//liveReloadServer.watch(__dirname); to watch the whole project
+liveReloadServer.watch(path.join(__dirname, "app.js"));
+liveReloadServer.watch(path.join(__dirname, "../client/views"));
+liveReloadServer.watch(path.join(__dirname, "../client/views/styles"));
+app.use(connectLivereload());*/

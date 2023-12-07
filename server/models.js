@@ -1,40 +1,38 @@
-
-const { Sequelize, DataTypes } = require('sequelize');
+const { Sequelize, DataTypes } = require("sequelize");
 const sequelize = new Sequelize({
-  dialect: 'sqlite',
-  storage: './database.sqlite',
+  dialect: "sqlite",
+  storage: "./database.sqlite",
 });
-const Users = sequelize.define('Users', {
-      idUser:{
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        allowNull: false,
-        autoIncrement: true,
-        
-      },
-      login: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
-        validate: {
-          notEmpty: true,
-        },
-      },
-      PSW: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: true,
-        },
-      },
-      nomComplet: {
-        type: DataTypes.STRING,
-        defaultValue: "USER"
-      },
+const Users = sequelize.define("Users", {
+  idUser: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    allowNull: false,
+    autoIncrement: true,
+  },
+  login: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true,
+    validate: {
+      notEmpty: true,
+    },
+  },
+  PSW: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: true,
+    },
+  },
+  nomComplet: {
+    type: DataTypes.STRING,
+    defaultValue: "USER",
+  },
 });
 
-const Fleurs = sequelize.define('Fleurs', {
-  idFleur:{
+const Fleurs = sequelize.define("Fleurs", {
+  idFleur: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     allowNull: false,
@@ -52,19 +50,18 @@ const Fleurs = sequelize.define('Fleurs', {
     type: DataTypes.DOUBLE,
     allowNull: false,
   },
-  image:{
-    type:DataTypes.STRING,
-    allowNull:false
+  image: {
+    type: DataTypes.STRING,
+    allowNull: false,
   },
 });
 
-const Bouquets = sequelize.define('Bouquets', {
-  idBouquet:{
+const Bouquets = sequelize.define("Bouquets", {
+  idBouquet: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     allowNull: false,
     autoIncrement: true,
-   
   },
   nom: {
     type: DataTypes.STRING,
@@ -78,17 +75,16 @@ const Bouquets = sequelize.define('Bouquets', {
     type: DataTypes.DOUBLE,
     allowNull: false,
   },
-  image:{
-    type:DataTypes.STRING,
-    allowNull:false
+  image: {
+    type: DataTypes.STRING,
+    allowNull: false,
   },
 });
 
-Users.belongsToMany(Bouquets, { through: 'UserLikes' });
-Bouquets.belongsToMany(Users, { through: 'UserLikes' });
+Users.belongsToMany(Bouquets, { through: "UserLikes" });
+Bouquets.belongsToMany(Users, { through: "UserLikes" });
 
-Bouquets.belongsToMany(Fleurs, { through: 'contientFleur' });
-Fleurs.belongsToMany(Bouquets, { through: 'contientFleur' });
+Bouquets.belongsToMany(Fleurs, { through: "contientFleur" });
+Fleurs.belongsToMany(Bouquets, { through: "contientFleur" });
 
-
-module.exports = { Users, Fleurs, Bouquets,sequelize };
+module.exports = { Users, Fleurs, Bouquets, sequelize };

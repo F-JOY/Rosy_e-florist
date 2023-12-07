@@ -7,7 +7,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 const Bouquet = (props) => {
   
     const [B, setB] = useState(props.bouquet);
-   
+   const [like, setlike] = useState(false);
    const existingCart = JSON.parse(localStorage.getItem("ShoppingCart")) || [];
     const isBouquetInCart = existingCart.some(
       (item) => item.id === B.id
@@ -19,24 +19,13 @@ const Bouquet = (props) => {
       console.log("refrech")
     }, [B,added]);
 
-    const handleLike = async () => {
-      console.log("handleLike called");
-      try {
-        const response = await fetch(`http://localhost:5000/api/bouquets/like/${props.bouquet.id}`, {
-          method: 'PUT',
-        });
-    
-        if (response.ok) {
-          const data = await response.json();
-          console.log(data.message);
-          setB(data.bouquet)
-
-        } else {
-          console.error('Échec de la mise à jour du statut "like"');
-        }
-      } catch (error) {
-        console.error('Une erreur s\'est produite :', error);
-      }
+    const handleLike = () => {
+      console.log("handle like called")
+      fetch(`/api/like/${props.bouquet.id}`, {
+        method: "PUT",
+      });
+      setlike(!like)
+  
     };
     
   const handleAdd2Cart=()=>{
@@ -92,7 +81,7 @@ const Bouquet = (props) => {
                 
 
                 <IconButton onClick={handleLike}>
-                  {B.like ? (
+                  {like ? (
                     <FavoriteIcon className="likedIcon" />
                   ) : (
                     <FavoriteBorderIcon className="likeIcon" />

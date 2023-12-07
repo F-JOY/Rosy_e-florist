@@ -3,11 +3,11 @@ const Fleur = (props) => {
         <>
         
         <div className="col-lg-3 col-md-6 mb-4 container d-flex justify-content-center align-items-center">
-                <div className="card" >
+                <div className="card cardform" >
                     <img src={props.fleur.image} className="card-image" alt="..."/>
                     <div className="card-body">
                         <h5 className="card-title">{props.fleur.nom}</h5>
-                        <p className="card-text">{props.fleur.discr}</p>
+                        <p className="card-text">{props.fleur.descr}</p>
                        
 
                     </div>

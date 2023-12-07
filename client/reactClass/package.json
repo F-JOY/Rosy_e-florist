@@ -43,10 +43,7 @@
       "last 1 safari version"
     ]
   },
-  "options": {
-    "allowedHosts": ["localhost", ".localhost"],
-    "proxy": "http://localhost:5000"
-  },
+  "proxy": "http://localhost:5000",
 
   "devDependencies": {
     "nodemon": "^3.0.1",

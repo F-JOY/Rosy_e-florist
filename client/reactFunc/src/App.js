@@ -12,6 +12,7 @@ function App() {
   const [mesBouquets, setMesBouquets] = useState([]);
   
   useEffect(() => {
+   
     fetch('http://localhost:5000/api/getBouquets')
       .then(response => {
         if (!response.ok) {

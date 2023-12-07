@@ -1,0 +1,15 @@
+const handleStorageChange = () => {
+    const updatedItemCount = JSON.parse(localStorage.getItem("nombre")) || 0;
+    setCartItemCount(updatedItemCount);
+  };
+
+  window.addEventListener('storage', handleStorageChange);
+
+  // Charger le nombre d'articles au montage du composant
+  const storedItemCount = JSON.parse(localStorage.getItem("nombre")) || 0;
+  setCartItemCount(storedItemCount);
+
+  // Nettoyer l'écouteur d'événements lors du démontage du composant
+  return () => {
+    window.removeEventListener('storage', handleStorageChange);
+  };

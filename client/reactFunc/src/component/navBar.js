@@ -4,18 +4,15 @@ import { state } from "../data/state";
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import Badge from '@mui/material/Badge';
 import { IconButton } from "@mui/material";
-export default function NavBar() {
-/*
-  const state ={navigation: [
-    {id: 1, path: "/",  label: "Accueil" },
-    {id: 2, path: "/bouquets",  label: "Bouquets"},
-    { id: 3, path: "/fleurs",  label: "Fleurs" },
-    {id: 4,  path: "/compte", label: "Mon Compt" },
-  ]};
-*/
-const [cartItemCount, setCartItemCount] = useState(0);
+import getDBdata from "../request";
 
+export default function NavBar() {
+const [cartItemCount, setCartItemCount] = useState(0);
+const [userName, setuserName] = useState();
+const [isAuthontificated, setisAuthontificated] = useState(false);
+const login='user1'
 useEffect(() => {
+  
   const handleStorageChange = () => {
     const updatedItemCount = JSON.parse(localStorage.getItem("nombre")) || 0;
     setCartItemCount(updatedItemCount);
@@ -28,11 +25,24 @@ useEffect(() => {
   setCartItemCount(storedItemCount);
 
   // Nettoyer l'écouteur d'événements lors du démontage du composant
-  return () => {
-    window.removeEventListener('storage', handleStorageChange);
-  };
+ 
 }, []);
-
+const fetchUserByLogin = async () => {
+  try {
+    const data = await getDBdata(`/api/GetUserByLogin/${login}`, 'GET');
+    console.log(data.nomComplet)
+    setuserName(data.nomComplet)
+  } catch (error) {
+    console.error(`Erreur lors de la récupération de l'utilisateur avec login ${login}:`, error);
+  }
+};
+ const handleConnect =()=>{
+   setisAuthontificated(true)
+ }
+ const handledeConnect =()=>{
+  setisAuthontificated(false)
+  
+ }
   return (
     <>
       <div className="bg-color">
@@ -57,7 +67,8 @@ useEffect(() => {
 
               <li key={nav.id} className="nav-item">
                 <Link to={nav.path} className="nav-link active">
-                 {nav.label}
+                    {nav.isCmpt && isAuthontificated ? (userName):(nav.label)}
+                 
                 </Link>
               </li>
 
@@ -71,9 +82,20 @@ useEffect(() => {
                 </Badge>
                 </IconButton>
               </Link>
-              <button className="btn btn-color my-2 my-sm-0 " type="submit">
-                Connexion
+              <button className="btn btn-color my-2 my-sm-0 "  onClick={()=>{fetchUserByLogin();setisAuthontificated(true)}}>
+                   Connexion
               </button>
+
+               {/*!isAuthontificated ? (
+                <button className="btn btn-color my-2 my-sm-0 "  onClick={handleConnect}>
+                   Connexion
+              </button>
+               ):(
+                <button className="btn btn-color my-2 my-sm-0 " onClick={handledeConnect}>
+                   deConnexion
+              </button>
+               )*/}
+              
             </form>
           </div>
         </nav>
