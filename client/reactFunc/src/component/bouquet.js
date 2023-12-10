@@ -7,27 +7,36 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 const Bouquet = (props) => {
   
     const [B, setB] = useState(props.bouquet);
-   const [like, setlike] = useState(false);
    const existingCart = JSON.parse(localStorage.getItem("ShoppingCart")) || [];
     const isBouquetInCart = existingCart.some(
       (item) => item.id === B.id
     );
     const [added,setAdded]=useState(isBouquetInCart);
     useEffect(() => {
-      
-      console.log("Bouquet data changed:", B.like);
-      console.log("refrech")
+   
     }, [B,added]);
 
     const handleLike = () => {
-      console.log("handle like called")
+      console.log("handle like called");
+    
       fetch(`/api/like/${props.bouquet.id}`, {
         method: "PUT",
-      });
-      setlike(!like)
-  
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then((data) => {
+          console.log("Server response:", data); 
+          setB(data);
+        })
+        .catch((error) => {
+          console.error("Error fetching data:", error);
+        
+        });
     };
-    
   const handleAdd2Cart=()=>{
     const existingCart = JSON.parse(localStorage.getItem("ShoppingCart")) || [];
     const isBouquetInCart = existingCart.some(
@@ -81,7 +90,7 @@ const Bouquet = (props) => {
                 
 
                 <IconButton onClick={handleLike}>
-                  {like ? (
+                  {B.like ? (
                     <FavoriteIcon className="likedIcon" />
                   ) : (
                     <FavoriteBorderIcon className="likeIcon" />

@@ -10,7 +10,7 @@ import { BrowserRouter,Routes,Route } from "react-router-dom";
 import {  useEffect,useState } from "react";
 function App() {
   const [mesBouquets, setMesBouquets] = useState([]);
-  
+ 
   useEffect(() => {
    
     fetch('http://localhost:5000/api/getBouquets')
@@ -31,10 +31,10 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <NavBar/>
+        <NavBar />
         <Routes>
           <Route path="/" element={<Home bouquets={mesBouquets}/>} />
-          <Route path="/bouquets" element={<Bouquets titre="Découvrir Nos Bouquets" bouquets={mesBouquets}/>} />
+          <Route path="/bouquets" element={<Bouquets  titre="Découvrir Nos Bouquets" bouquets={mesBouquets}/>} />
           <Route path="/fleurs" element={<Fleurs fleurs={state.Fleurs}/>} /> 
           <Route path="/compte" element={<Compte />} /> 
           <Route path="/pannier" element={<ShoppingCart/>} />

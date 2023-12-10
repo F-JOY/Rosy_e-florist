@@ -23,7 +23,7 @@ useEffect(() => {
         </div>
     <div className="container">
         <div className="row">
-          {props.bouquets.map((bouquet) => (
+          {bouquets.map((bouquet) => (
             <div  className="col-lg-4 col-md-4 mb-4 container d-flex justify-content-center align-items-center" >
                <Bouquet bouquet={bouquet} />
             </div>

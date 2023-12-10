@@ -136,7 +136,8 @@ app.put('/api/like/:bouquetId', (req, res) => {
   const bouquetaModifier = bouquet.find(b => b.id === bouquetId);
   if (bouquetaModifier) {
     bouquetaModifier.like = !bouquetaModifier.like;
-    
+    res.json(bouquetaModifier);
+    console.log(bouquetaModifier);
     console.log("Bouquet modifié avec succès : " + bouquetId);
     res.status(200).send("Bouquet modifié avec succès");
   } else {
