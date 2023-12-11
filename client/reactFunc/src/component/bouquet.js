@@ -4,6 +4,10 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import { IconButton } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import LocalFloristRoundedIcon from '@mui/icons-material/LocalFloristRounded';
+import Tooltip from '@mui/material/Tooltip';
+
+import BqFlowres from "./BqFlowres";
 const Bouquet = (props) => {
   
     const [B, setB] = useState(props.bouquet);
@@ -69,8 +73,14 @@ const Bouquet = (props) => {
   return (
     <>
      
-        <div className="card">
+        <div className="card" >
+       
           <img src={props.bouquet.image} className="card-image" alt="..." />
+          <Tooltip title={<BqFlowres />} placement="right-end">
+        <IconButton style={{ position: 'absolute', top: 0, right: 0 }}>
+          <LocalFloristRoundedIcon />
+        </IconButton>
+      </Tooltip>
           <div className="card-body">
             <h5 className="card-title">{props.bouquet.nom}</h5>
             <p className="card-text">{props.bouquet.descr}</p>
@@ -100,7 +110,6 @@ const Bouquet = (props) => {
             </div>
           </div>
         </div>
-     
     </>
   );
 };

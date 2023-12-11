@@ -21,8 +21,7 @@ export default function LoginModal() {
     aria-hidden="true"
   >
     <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        
+      <div class="modal-content">   
         <div class="modal-body">
             <button
             type="button"
