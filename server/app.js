@@ -2,7 +2,7 @@ const express = require("express");
 const path = require("path");
 const app = express();
 
-const { Users, Fleurs, Bouquets, sequelize } = require('./models');
+const { Users, Fleurs, Bouquets,ContientFleur, sequelize } = require('./models');
 const {Op}=require("sequelize")
 ///////////Connexion BD///////////////////////////
 
@@ -104,9 +104,17 @@ app.get("/api/GetUserByLogin/:login", (req, res) => {
       res.status(500).json({ error: 'Erreur lors de la récupération de l\'utilisateur depuis la base de données' });
     });
 });
+app.get('/api/contientFleur', async (req, res) => {
+  try {
+    const associations = await ContientFleur.findAll();
+    res.json(associations);
+  } catch (error) {
+    console.error('Error retrieving associations:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
 
-
-
+//////////////////////////Sans base de donnée///////////////////////////////
 const bouquet = require("../Data/bouquets.json");
 app.get("/api/getBouquets", (req, res) => {
   res.json(bouquet);

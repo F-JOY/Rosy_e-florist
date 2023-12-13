@@ -1,3 +1,5 @@
+
+
 .footer-divider {
     border-top: 1px solid #d959a4;
 }
@@ -55,6 +57,10 @@
   height: 450px;
   width: 300px;
 }
+.Fcardform{
+  height: 600px;
+  width: 400px;
+}
 .likeIcon:hover{
     color: #ff69b4;
   
@@ -64,7 +70,7 @@
     color:red;
 }
 .avis-card {
-    border: 1px solid #ddd; /* Adds a thin border to the card */
+    border: 1px solid #ddd; 
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -169,3 +175,7 @@
     margin:0px 10px 10px 10px;
     border-radius: 50%;
 }  
+.custom-tooltip {
+  background-color: white;
+  color: black;
+}

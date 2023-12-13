@@ -84,7 +84,14 @@ const Bouquets = sequelize.define("Bouquets", {
 Users.belongsToMany(Bouquets, { through: "UserLikes" });
 Bouquets.belongsToMany(Users, { through: "UserLikes" });
 
-Bouquets.belongsToMany(Fleurs, { through: "contientFleur" });
-Fleurs.belongsToMany(Bouquets, { through: "contientFleur" });
+const ContientFleur = sequelize.define('contientFleur', {
+  qntt: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    defaultValue: 0, 
+  },
+});
+Bouquets.belongsToMany(Fleurs, { through: ContientFleur });
+Fleurs.belongsToMany(Bouquets, { through: ContientFleur });
 
-module.exports = { Users, Fleurs, Bouquets, sequelize };
+module.exports = { Users, Fleurs, Bouquets,ContientFleur, sequelize };

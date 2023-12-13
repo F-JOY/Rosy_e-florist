@@ -12,20 +12,19 @@ export default function LoginModal() {
   return (
 
     <div
-    class="modal fade"
+    className="modal fade"
     id="staticBackdrop"
     data-bs-backdrop="static"
     data-bs-keyboard="false"
-    tabindex="-1"
     aria-labelledby="staticBackdropLabel"
     aria-hidden="true"
   >
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">   
-        <div class="modal-body">
+    <div className="modal-dialog modal-dialog-centered">
+      <div className="modal-content">   
+        <div className="modal-body">
             <button
             type="button"
-            class="btn-close"
+            className="btn-close"
             data-bs-dismiss="modal"
             aria-label="Close"
           ></button>

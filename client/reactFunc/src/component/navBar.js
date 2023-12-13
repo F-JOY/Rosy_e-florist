@@ -99,7 +99,7 @@ export default function NavBar({ onLoginClick }) {
                 className="btn btn-color my-2 my-sm-0 "
                 onClick={handledeConnect}
               >
-                deConnexion
+                deconnexion
               </button>
             )}
           </div>

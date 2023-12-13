@@ -8,6 +8,7 @@ import ShoppingCart from "./pages/ShoppingCart";
 import { state } from "./data/state";
 import { BrowserRouter,Routes,Route } from "react-router-dom";
 import {  useEffect,useState } from "react";
+import BqInfo from "./pages/BqInfo";
 function App() {
   const [mesBouquets, setMesBouquets] = useState([]);
  
@@ -38,6 +39,7 @@ function App() {
           <Route path="/fleurs" element={<Fleurs fleurs={state.Fleurs}/>} /> 
           <Route path="/compte" element={<Compte />} /> 
           <Route path="/pannier" element={<ShoppingCart/>} />
+          <Route path="/BqInfo" element={<BqInfo/>} />
         </Routes>
       <Footer />
       </BrowserRouter>      

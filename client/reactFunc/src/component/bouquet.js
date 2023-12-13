@@ -6,18 +6,17 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import LocalFloristRoundedIcon from '@mui/icons-material/LocalFloristRounded';
 import Tooltip from '@mui/material/Tooltip';
-
 import BqFlowres from "./BqFlowres";
 const Bouquet = (props) => {
   
     const [B, setB] = useState(props.bouquet);
    const existingCart = JSON.parse(localStorage.getItem("ShoppingCart")) || [];
     const isBouquetInCart = existingCart.some(
-      (item) => item.id === B.id
+      (item) => item.nom === B.nom
     );
     const [added,setAdded]=useState(isBouquetInCart);
     useEffect(() => {
-   
+   console.log(added)
     }, [B,added]);
 
     const handleLike = () => {
@@ -44,7 +43,7 @@ const Bouquet = (props) => {
   const handleAdd2Cart=()=>{
     const existingCart = JSON.parse(localStorage.getItem("ShoppingCart")) || [];
     const isBouquetInCart = existingCart.some(
-      (item) => item.id === B.id
+      (item) => item.nom === B.nom
     ); 
     
     if(!isBouquetInCart){
@@ -58,11 +57,11 @@ const Bouquet = (props) => {
  const handleRemove4mCart=()=>{
   const existingCart = JSON.parse(localStorage.getItem("ShoppingCart")) || [];
   const isBouquetInCart = existingCart.some(
-    (item) => item.id === B.id
+    (item) => item.nom === B.nom
   );
   if(isBouquetInCart){
     const updatedCart = existingCart.filter(
-      (item) => item.id !== B.id
+      (item) => item.nom !== B.nom
     );
     localStorage.setItem("ShoppingCart", JSON.stringify(updatedCart));
     localStorage.setItem("nombre",JSON.parse(localStorage.getItem("ShoppingCart"))?.length)
@@ -76,7 +75,7 @@ const Bouquet = (props) => {
         <div className="card" >
        
           <img src={props.bouquet.image} className="card-image" alt="..." />
-          <Tooltip title={<BqFlowres />} placement="right-end">
+          <Tooltip title={<BqFlowres/>}  placement="right-end"  arrow  enterDelay={200} leaveDelay={500}>
         <IconButton style={{ position: 'absolute', top: 0, right: 0 }}>
           <LocalFloristRoundedIcon />
         </IconButton>
