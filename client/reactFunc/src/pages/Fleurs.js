@@ -20,7 +20,7 @@ export default function Fleurs(props){
      <div className="container-fluid d-flex justify-content-center align-items-center p-4 mt-4">
         <h1>Decouvrir Nos fleurs </h1>
         </div>
-      <div className="container ">
+      <div className="container">
         <div className="row">
           {fleurs.map((fleur) => (
           <Fleur fleur={fleur}/>
