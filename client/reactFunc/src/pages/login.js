@@ -1,19 +1,26 @@
 import { useState } from 'react';
 
 import React from 'react'
-
+import getDBdata from '../request';
 export default function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-  
+    const fetchUserByLogin = async (login) => {
+      try {
+        const data = await getDBdata(`/api/Users/${login}`, "GET");
+        console.log(data.nomComplet);
+        localStorage.setItem("isAuthontificated",true)
+        localStorage.setItem("userName",data.nomComplet)
+      } catch (error) {
+        console.error(
+          `Erreur lors de la récupération de l'utilisateur avec login ${login}:`,
+          error
+        );
+      }
+    };
     const handleSubmit = (e) => {
       e.preventDefault();
-  
-      // Add your login logic here (authentication, validation, etc.)
-      console.log('Username:', username);
-      console.log('Password:', password);
-  
-      // Reset form fields after submission
+      fetchUserByLogin(username)
       setUsername('');
       setPassword('');
     };

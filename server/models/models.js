@@ -1,8 +1,6 @@
-const { Sequelize, DataTypes } = require("sequelize");
-const sequelize = new Sequelize({
-  dialect: "sqlite",
-  storage: "./database.sqlite",
-});
+const { DataTypes,Sequelize } = require("sequelize");
+const {sequelize}=require('../outils/DBconnect')
+
 const Users = sequelize.define("Users", {
   idUser: {
     type: DataTypes.INTEGER,
@@ -84,7 +82,7 @@ const Bouquets = sequelize.define("Bouquets", {
 Users.belongsToMany(Bouquets, { through: "UserLikes" });
 Bouquets.belongsToMany(Users, { through: "UserLikes" });
 
-const ContientFleur = sequelize.define('contientFleur', {
+const ContientFleur = sequelize.define('ContientFleur', {
   qntt: {
     type: DataTypes.INTEGER,
     allowNull: false,
@@ -94,4 +92,4 @@ const ContientFleur = sequelize.define('contientFleur', {
 Bouquets.belongsToMany(Fleurs, { through: ContientFleur });
 Fleurs.belongsToMany(Bouquets, { through: ContientFleur });
 
-module.exports = { Users, Fleurs, Bouquets,ContientFleur, sequelize };
+module.exports = { Users, Fleurs, Bouquets,ContientFleur };

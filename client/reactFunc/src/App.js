@@ -14,7 +14,7 @@ function App() {
  
   useEffect(() => {
    
-    fetch('http://localhost:5000/api/getBouquets')
+    fetch('/api/Bouquets/static')
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');

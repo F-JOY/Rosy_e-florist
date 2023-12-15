@@ -1,13 +1,16 @@
 import React from 'react'
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-export default function BqFlowres() {
+export default function BqFlowres(props) {
     
       const flowers = [
         { nom: 'Rose', image: "/image/dahlia.jpg", prix: 350, quantity: 10 },
         { nom: 'Tulip', image: "/image/freesia.jpg", prix: 500, quantity: 5 },
      
       ];
+  const [Bflwr, setBflwr] = useState(props.flwr);
+     
   return (
     <>
     <div>

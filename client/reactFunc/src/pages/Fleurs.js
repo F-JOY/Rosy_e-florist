@@ -6,7 +6,7 @@ export default function Fleurs(props){
   useEffect(() => {
     const fetchFleurs = async () => {
       try {
-        const data = await getDBdata('/api/GetFleursFromDB', 'GET');
+        const data = await getDBdata('/api/Fleurs/db', 'GET');
         setFleurs(data);
         console.log(data)
       } catch (error) {

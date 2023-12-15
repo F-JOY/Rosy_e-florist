@@ -22,7 +22,7 @@ const Bouquet = (props) => {
     const handleLike = () => {
       console.log("handle like called");
     
-      fetch(`/api/like/${props.bouquet.id}`, {
+      fetch(`/api/Bouquets/like/static/${props.bouquet.id}`, {
         method: "PUT",
       })
         .then((response) => {

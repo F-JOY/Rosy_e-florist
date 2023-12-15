@@ -8,9 +8,9 @@ import getDBdata from "../request";
 import LoginModal from "./LoginModal";
 export default function NavBar({ onLoginClick }) {
   const [cartItemCount, setCartItemCount] = useState(0);
-  const [userName, setuserName] = useState();
-  const [isAuthontificated, setisAuthontificated] = useState(false);
-  const login = "user1";
+  const [userName, setuserName] = useState(localStorage.getItem("userName"));
+  const [isAuthontificated, setisAuthontificated] = useState(localStorage.getItem("isAuthontificated"));
+  
   useEffect(() => {
     const handleStorageChange = () => {
       const updatedItemCount = JSON.parse(localStorage.getItem("nombre")) || 0;
@@ -25,26 +25,16 @@ export default function NavBar({ onLoginClick }) {
 
     // Nettoyer l'écouteur d'événements lors du démontage du composant
     if (isAuthontificated) {
-      fetchUserByLogin();
+    
     }
   }, [isAuthontificated]);
-  const fetchUserByLogin = async () => {
-    try {
-      const data = await getDBdata(`/api/GetUserByLogin/${login}`, "GET");
-      console.log(data.nomComplet);
-      setuserName(data.nomComplet);
-    } catch (error) {
-      console.error(
-        `Erreur lors de la récupération de l'utilisateur avec login ${login}:`,
-        error
-      );
-    }
-  };
+ 
   const handleConnect = () => {
-    setisAuthontificated(true);
+   
   };
   const handledeConnect = () => {
-    setisAuthontificated(false);
+    localStorage.removeItem("userName")
+    localStorage.removeItem("isAuthontificated");
   };
   return (
     <>

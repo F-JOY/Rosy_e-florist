@@ -1,15 +1,16 @@
-const { sequelize, Users, Fleurs, Bouquets, ContientFleur} = require('./models');
-const fleurs = require("../Data/fleurs.json");
-const bouquet = require("../Data/bouquets.json");
-const insertData = async () => {
-    await sequelize.models.Fleurs.bulkCreate(fleurs);
+const {  Users, Fleurs, Bouquets, ContientFleur} = require('../models/models');
+const fleurs = require("../../Data/fleurs.json");
+const bouquet = require("../../Data/bouquets.json");
 
-    await sequelize.models.Bouquets.bulkCreate(bouquet);
+const insertData = async () => {
+   Fleurs.bulkCreate(fleurs);
+
+  Bouquets.bulkCreate(bouquet);
   
     
 
     
-    await sequelize.models.Users.bulkCreate([
+    Users.bulkCreate([
       { login: 'user1', PSW:'123abc' ,nomComplet:'BERKATI Farah'},
       { login: 'user2', PSW:'123abc' ,nomComplet:'BERKATI Joy'},
     

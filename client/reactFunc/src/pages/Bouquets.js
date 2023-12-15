@@ -7,7 +7,7 @@ const [bouquets,setBouquets]=useState([]);
 useEffect(() => {
   const fetchBouquets = async () => {
     try {
-      const data = await getDBdata('/api/GetBouquetsFromDB', 'GET');
+      const data = await getDBdata('/api/Bouquets/db', 'GET');
       setBouquets(data);
     } catch (error) {
       console.error('Error fetching bouquets:', error.message);
@@ -23,7 +23,7 @@ useEffect(() => {
         </div>
     <div className="container">
         <div className="row">
-          {bouquets.map((bouquet) => (
+          {props.bouquets.map((bouquet) => (
             <div  className="col-lg-4 col-md-4 mb-4 container d-flex justify-content-center align-items-center" >
                <Bouquet bouquet={bouquet} />
             </div>

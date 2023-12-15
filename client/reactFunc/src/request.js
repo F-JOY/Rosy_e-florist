@@ -10,4 +10,4 @@ const getDBdata = async (url, method, data, headers) => {
     }
     return response.json();
   };
-  export default getDBdata;
+export default getDBdata;
