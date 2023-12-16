@@ -1,19 +1,12 @@
 import Fleur from "../component/fleur";
 import { useEffect, useState } from "react";
-import getDBdata from "../request";
+import { getDbFleurs } from "../fetchFunc/fetchFlowrs";
 export default function Fleurs(props){
   const [fleurs, setFleurs] = useState([]); 
   useEffect(() => {
-    const fetchFleurs = async () => {
-      try {
-        const data = await getDBdata('/api/Fleurs/db', 'GET');
-        setFleurs(data);
-        console.log(data)
-      } catch (error) {
-        console.error('Error fetching bouquets:', error.message);
-      }
-    };
-    fetchFleurs();
+      getDbFleurs();
+      setFleurs(JSON.parse(localStorage.getItem("Fleurs")))
+    
   }, []);
     return(
         <>

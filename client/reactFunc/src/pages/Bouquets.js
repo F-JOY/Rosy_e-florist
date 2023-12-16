@@ -1,21 +1,15 @@
 
 import { useEffect, useState } from "react";
 import Bouquet from "../component/bouquet";
-import getDBdata from "../request";
+import {getDbBouquet} from "../fetchFunc/fetchBouquet";
 export default function Bouquets(props) {
 const [bouquets,setBouquets]=useState([]);
-useEffect(() => {
-  const fetchBouquets = async () => {
-    try {
-      const data = await getDBdata('/api/Bouquets/db', 'GET');
-      setBouquets(data);
-    } catch (error) {
-      console.error('Error fetching bouquets:', error.message);
-    }
-    
-  };
-  fetchBouquets();
-}, []);
+useEffect(() => { 
+ // getDbBouquet().then(bouquets => setBouquets(bouquets));
+ getDbBouquet();
+ setBouquets(JSON.parse(localStorage.getItem('Bouquets')) )
+ }, []);
+
   return (
     <>
      <div className="container-fluid d-flex justify-content-center align-items-center p-4 mt-4">
