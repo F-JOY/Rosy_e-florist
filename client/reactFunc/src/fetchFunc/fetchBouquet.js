@@ -5,7 +5,7 @@ import getDBdata from "../request";
 export  const getDbBouquet=async()=>{
     try {
         const data = await getDBdata('/api/Bouquets/db', 'GET');
-        localStorage.setItem("Bouquets",JSON.stringify(data))
+        localStorage.setItem("Bouquets",JSON.stringify(data.data))
         return (data);
       } catch (error) {
         console.error('Error fetching bouquets:', error.message);

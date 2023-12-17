@@ -28,7 +28,7 @@ export default function LoginModal() {
             data-bs-dismiss="modal"
             aria-label="Close"
           ></button>
-            <Login/>
+            <Login onClose={handleLoginClick}/>
         </div>
        
       </div>

@@ -1,32 +1,35 @@
 import { useState } from 'react';
 
 import React from 'react'
-import getDBdata from '../request';
-export default function Login() {
+import { getUser } from '../fetchFunc/fetchUser';
+export default function Login({ onClose }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const fetchUserByLogin = async (login) => {
-      try {
-        const data = await getDBdata(`/api/Users/${login}`, "GET");
-        console.log(data.nomComplet);
-        localStorage.setItem("isAuthontificated",true)
-        localStorage.setItem("userName",data.nomComplet)
-      } catch (error) {
-        console.error(
-          `Erreur lors de la récupération de l'utilisateur avec login ${login}:`,
-          error
-        );
-      }
-    };
-    const handleSubmit = (e) => {
+    const [error, setError] = useState('');
+    const handleSubmit = async(e) => {
       e.preventDefault();
-      fetchUserByLogin(username)
+    
+    if (!username || !password) {
+      setError('Veuillez remplir tous les champs.');
+      return;
+    }
+
+    try {
+      const userData = await getUser(username, password);
+      // Si la requête réussit, vous pouvez traiter la réponse ici
+      console.log('User data:', userData);
+      onClose();
       setUsername('');
       setPassword('');
+      setError('');
+    } catch {
+      setError('Identifiants incorrects.');
+    }
     };
   
     return (
       <form className="login-form" onSubmit={handleSubmit}>
+         <div className="error-message">{error}</div>
         <div className="form-group">
           <label htmlFor="username">Username:</label>
           <input
@@ -50,6 +53,8 @@ export default function Login() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
+        
+     
         <div className='d-flex justify-content-center align-items-center'>
           <button type="submit" className="log_btn btn-primary">
           Log In

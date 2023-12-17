@@ -6,19 +6,20 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import LocalFloristRoundedIcon from "@mui/icons-material/LocalFloristRounded";
 import Tooltip from "@mui/material/Tooltip";
-import Chip from "@mui/material/Chip";
 import BqFlowres from "./BqFlowres";
 import { likeStaticBouquet } from "../fetchFunc/fetchBouquet";
 const Bouquet = (props) => {
   const [B, setB] = useState(props.bouquet);
+  const [like, setlike] = useState(false);
   const existingCart = JSON.parse(localStorage.getItem("ShoppingCart")) || [];
   const isBouquetInCart = existingCart.some((item) => item.nom === B.nom);
   const [added, setAdded] = useState(isBouquetInCart);
-  useEffect(() => {}, [B, added]);
+  useEffect(() => {}, [B, added,like]);
 
   const handleLike = () => {
     console.log("handle like called");
-    likeStaticBouquet(B.id).then((newBouquet) => setB(newBouquet));
+    setlike(!like)
+    //likeStaticBouquet(B.id).then((newBouquet) => setB(newBouquet));
   };
   const handleAdd2Cart = () => {
     const existingCart = JSON.parse(localStorage.getItem("ShoppingCart")) || [];
@@ -52,7 +53,7 @@ const Bouquet = (props) => {
       <div className="card ">
         <img src={props.bouquet.image} className="card-image" alt="..." />
         <Tooltip
-          title={<BqFlowres />}
+          title={<BqFlowres Fleurs={props.bouquet.Fleurs}/>}
           placement="right-end"
           arrow
           enterDelay={200}
@@ -80,12 +81,12 @@ const Bouquet = (props) => {
               )}
 
               <IconButton onClick={handleLike}>
-                {B.like ? (
+                {like ? (
                   <>
                     <Badge
                      badgeContent={
                       <div className=" nbLike"
-                      > +{44 /*B.nbLike-1*/ }</div>
+                      > +{B.LikesCount }</div>
                     }
                       anchorOrigin={{
                         vertical: 'top',

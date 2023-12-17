@@ -186,6 +186,8 @@
    position: absolute;
    top: 2px;
   left: 2px;
-  
-  
+}
+.error-message{
+  font-size: small;
+  color: red;
 }

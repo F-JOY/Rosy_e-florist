@@ -1,6 +1,7 @@
 const { DataTypes,Sequelize } = require("sequelize");
 const {sequelize}=require('../outils/DBconnect')
-
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 const Users = sequelize.define("Users", {
   idUser: {
     type: DataTypes.INTEGER,
@@ -28,7 +29,23 @@ const Users = sequelize.define("Users", {
     defaultValue: "USER",
   },
 });
-
+Users.prototype.generateToken = function () {
+  return jwt.sign(
+    { id: this.idUser, type: this.type },
+    process.env.JWT_SECRET_KEY,
+    {
+      expiresIn: process.env.JWT_EXPIRE_TIME,
+    }
+  );
+};
+/*
+Users.beforeCreate(async function (next) {
+  if (!this.isModified("password")) return next();
+  //hashing user password
+  this.password = await bcrypt.hash(this.password, 10);
+  next();
+})
+*/
 const Fleurs = sequelize.define("Fleurs", {
   idFleur: {
     type: DataTypes.INTEGER,

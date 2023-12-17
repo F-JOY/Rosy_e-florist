@@ -32,3 +32,29 @@ exports.getUserByLogin=async(req,res)=>{
         res.status(500).json({ error: 'Erreur lors de la récupération de l\'utilisateur depuis la base de données' });
       });
 }
+
+exports.addLike = async (req, res) => {
+  try {
+    const usr = await Users.findByPk(req.user.id);
+    const bouquet = await Bouquets.findByPk(req.params.id);
+
+    console.log('User:', usr);
+    console.log('Bouquet:', bouquet);
+
+    if (!usr || !bouquet) {
+      throw new Error('Utilisateur ou bouquet introuvable');
+    }
+
+    const hasLiked = await usr.hasBouquet(bouquet);
+
+    if (hasLiked) {
+      return res.status(200).json({ message: 'L\'utilisateur a déjà aimé ce bouquet.' });
+    }
+    const result = await usr.addBouquet(bouquet);
+
+    res.status(200).json({ result: result.length, data: result });
+  } catch (error) {
+    console.error(error);
+    throw new Error('Erreur lors de l\'ajout du like');
+  }
+};

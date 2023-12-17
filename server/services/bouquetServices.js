@@ -1,16 +1,42 @@
-const {Bouquets} = require('../models/models')
+const {Bouquets,Fleurs,Users} = require('../models/models')
 const staticBouquet= require('../../Data/bouquets.json')
 ////////////////SQLite database///////////////
 exports.getDBBouquet=async(req,res)=>{
-    Bouquets.findAll()
-    .then(bouquets => {
-      res.json(bouquets);
-      console.log("Réponse envoyée avec le code :", res.statusCode);
-    })
-    .catch(error => {
-      console.error('Erreur lors de la récupération des bouquets depuis la base de données:', error);
-      res.status(500).json({ error: 'Erreur lors de la récupération des bouquets depuis la base de données' });
+  try {
+    const bouquets = await Bouquets.findAll({
+      include: [
+        { model: Fleurs, as: 'Fleurs' },
+        { model: Users, as: 'Users', through: { attributes: [] } } // Ajoutez cette ligne pour inclure les utilisateurs sans les attributs de liaison
+      ],
     });
+
+    // Compter le nombre total de "likes" pour chaque bouquet
+    const bouquetsWithLikes = await Promise.all(bouquets.map(async (bouquet) => {
+      const likeCount = await bouquet.countUsers();
+      return {
+        idBouquet: bouquet.idBouquet,
+        nom: bouquet.nom,
+        descr: bouquet.descr,
+        prix: bouquet.prix,
+        image: bouquet.image,
+        Fleurs: bouquet.Fleurs.map(fleur => ({
+          idFleur: fleur.idFleur,
+          nom: fleur.nom,
+          prix: fleur.prix,
+          image: fleur.image,
+          ContientFleur: {
+            quantite: fleur.ContientFleur ? fleur.ContientFleur.qntt : 0,
+          },
+        })),
+        LikesCount: likeCount, 
+      };
+    }));
+
+    res.status(200).json({ result: bouquetsWithLikes.length, data: bouquetsWithLikes });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Erreur lors de la récupération des bouquets avec fleurs et likes.' });
+  }
 }
 
 /////////////static data//////////////////////////////////
