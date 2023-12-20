@@ -20,10 +20,24 @@ export const handleLogin=async(login,PSW)=>{
 export const verifyLoginToken=async()=>{
   try { 
     const token=(localStorage.getItem('UserToken'))
-    console.group(token)
+   // console.log(token)
     const headers = { 'Authorization': 'Bearer ' + token };
     const data = await getDBdata('/api/users/info/token', 'GET',null,headers);
-    console.log(data)
+  
+    return (data);
+  } catch (error) {
+    throw error;
+   
+  }
+ 
+}
+export const verifyLoginCookies=async()=>{
+  try { 
+    const auth =(document.cookie)
+   
+    const headers = { 'Cookie': auth};
+    const data = await getDBdata('/api/users/info/cookies', 'GET',null,headers);
+    console.log('fetchUser'+data.nomComplet)
     return (data);
   } catch (error) {
     throw error;

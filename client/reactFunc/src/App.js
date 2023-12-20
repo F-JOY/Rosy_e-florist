@@ -10,7 +10,7 @@ import ShoppingCart from "./pages/ShoppingCart";
 import BqInfo from "./pages/BqInfo";
 import { getBouquet } from "./fetchFunc/fetchBouquet";
 import { getFleur } from "./fetchFunc/fetchFlowrs";
-import { verifyLoginToken } from "./fetchFunc/fetchUser";
+import { verifyLoginCookies, verifyLoginToken } from "./fetchFunc/fetchUser";
 function App() {
   const [mesBouquets, setMesBouquets] = useState([]);
   const [mesFleur, setMesFleur] = useState([]);
@@ -22,13 +22,13 @@ function App() {
   }
   useEffect(() => {
     if(localStorage.getItem("UserToken")){
-       verifyLoginToken().then(data=>setuserData(data)) 
+       //verifyLoginToken().then(data=>setuserData(data)) 
     }
 
   getBouquet().then(bouquets=>setMesBouquets(bouquets))   
   getFleur().then(fleurs=>setMesFleur(fleurs))
- 
- // console.log(document.cookie);
+ verifyLoginCookies().then(data=>setuserData(data))
+  //console.log(document.cookie);
    if(document.cookie){
     setRole("utilisateur")
    }else{

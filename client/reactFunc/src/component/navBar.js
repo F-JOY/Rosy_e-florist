@@ -48,7 +48,7 @@ export default function NavBar(props) {
   };
   useEffect(() => {
     console.log('logseccus changed')
-    console.log(props.userData)
+   // console.log(props.userData)
     const handleStorageChange = () => {
       const updatedItemCount = JSON.parse(localStorage.getItem("nombre")) || 0;
       setCartItemCount(updatedItemCount);

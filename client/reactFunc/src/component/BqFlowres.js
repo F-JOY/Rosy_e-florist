@@ -4,9 +4,7 @@ import { useState, useEffect } from "react";
 
 export default function BqFlowres(props) {
   const [Bflwr, setBflwr] = useState(props.Fleurs);
-  useEffect(() => {
-    console.log("bouquet :" + props.Bouquet.image);
-  }, []);
+ 
   return (
     <>
       <div>
