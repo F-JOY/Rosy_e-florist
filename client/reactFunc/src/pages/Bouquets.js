@@ -5,6 +5,7 @@ import {getDbBouquet} from "../fetchFunc/fetchBouquet";
 
 export default function Bouquets(props) {
 const [bouquets,setBouquets]=useState([]);
+const role =props.role
 useEffect(() => { 
  // getDbBouquet().then(bouquets => setBouquets(bouquets));
  getDbBouquet();
@@ -21,7 +22,7 @@ useEffect(() => {
           {bouquets.map((bouquet) => (
             <div  className="col-lg-4 col-md-4 mb-4 container d-flex justify-content-center align-items-center" >
               
-               <Bouquet bouquet={bouquet} />
+               <Bouquet bouquet={bouquet} role={role} />
             </div>
            
           ))}

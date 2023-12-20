@@ -3,9 +3,11 @@ import { useEffect, useState } from "react";
 import { getDbFleurs } from "../fetchFunc/fetchFlowrs";
 export default function Fleurs(props){
   const [fleurs, setFleurs] = useState([]); 
+   const role =props.role
   useEffect(() => {
       getDbFleurs();
       setFleurs(JSON.parse(localStorage.getItem("Fleurs")))
+     
     
   }, []);
     return(
@@ -16,7 +18,7 @@ export default function Fleurs(props){
       <div className="container">
         <div className="row">
           {fleurs.map((fleur) => (
-          <Fleur fleur={fleur}/>
+          <Fleur fleur={fleur} role={role}/>
           ))}
         </div>
       </div>

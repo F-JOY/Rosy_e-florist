@@ -14,33 +14,41 @@ import { verifyLoginToken } from "./fetchFunc/fetchUser";
 function App() {
   const [mesBouquets, setMesBouquets] = useState([]);
   const [mesFleur, setMesFleur] = useState([]);
- 
   const [userData, setuserData] = useState({});
- 
+  const [role, setRole] = useState("visiteur");
+  const [RR, setRR] = useState();
+  const appRR=()=>{
+    setRR(!RR)
+  }
   useEffect(() => {
-    verifyLoginToken().then(data=>setuserData(data)).then(localStorage.setItem("isAuth",true))
-       
+    if(localStorage.getItem("UserToken")){
+       verifyLoginToken().then(data=>setuserData(data)) 
+    }
+
   getBouquet().then(bouquets=>setMesBouquets(bouquets))   
   getFleur().then(fleurs=>setMesFleur(fleurs))
  
-
-
-  console.log('app render ')
-  console.log('userdata:'+userData)
+ // console.log(document.cookie);
+   if(document.cookie){
+    setRole("utilisateur")
+   }else{
+    setRole('visiteur')
+   }
  
-  }, []);
+ 
+  }, [RR]);
 
   return (
     <div className="App">
       <BrowserRouter>
-        <NavBar  userData={userData}/>
+        <NavBar  userData={userData} reRender={appRR}/>
         <Routes>
           <Route path="/" element={<Home bouquets={mesBouquets}/>} />
-          <Route path="/bouquets" element={<Bouquets  titre="Découvrir Nos Bouquets" bouquets={mesBouquets}/>} />
-          <Route path="/fleurs" element={<Fleurs fleurs={mesFleur}/>} /> 
+          <Route path="/bouquets" element={<Bouquets  titre="Découvrir Nos Bouquets" bouquets={mesBouquets} role={role}/>} />
+          <Route path="/fleurs" element={<Fleurs fleurs={mesFleur} role={role}/>} /> 
           <Route path="/compte" element={<Compte />} /> 
           <Route path="/pannier" element={<ShoppingCart/>} />
-          <Route path="/BqInfo" element={<BqInfo/>} />
+          <Route path="/bqInfo/:bouquetData" element={<BqInfo/>} />
           
         
         

@@ -5,7 +5,8 @@ import { handleLogin } from "../fetchFunc/fetchUser";
 export default function Login({ onClose, onLogin }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(".");
+  const [error, setError] = useState("");
+  const [connected, setconnected] = useState(false);
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -18,6 +19,7 @@ export default function Login({ onClose, onLogin }) {
       const userData = await handleLogin(username, password);
       // Si la requête réussit, vous pouvez traiter la réponse ici
       // console.log('User data:', userData);
+      setconnected(true);
       setError("");
       onClose();
       onLogin();
@@ -27,7 +29,7 @@ export default function Login({ onClose, onLogin }) {
       setError("Identifiants incorrects.");
     }
   };
-
+  useEffect(() => {}, [connected]);
   return (
     <form className="login-form" onSubmit={handleSubmit}>
       <div className="error-message">{error}</div>
@@ -62,7 +64,11 @@ export default function Login({ onClose, onLogin }) {
       </div>
 
       <div className="d-flex justify-content-center align-items-center">
-        <button type="submit" className="log_btn btn-primary"  data-bs-dismiss={error ? '' : 'modal'}>
+        <button
+          type="submit"
+          className="log_btn btn-primary"
+          data-bs-dismiss={!connected ? "" : "modal"}
+        >
           Log In
         </button>
       </div>

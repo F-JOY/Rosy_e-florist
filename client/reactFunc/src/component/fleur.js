@@ -9,11 +9,14 @@ const Fleur = (props) => {
     <>
       <div className="col-lg-4 col-md-6  d-flex justify-content-center align-items-center "> 
         <div className="card Fcardform m-4 ">
+          {props.role==='utilisateur' && 
           <Tooltip title={<FlwrPrice prix={props.fleur.prix}/>} placement="top" arrow  >
             <IconButton  style={{ position: "absolute", top: "-10px", left: "96%" }}>
               <img src={flwrTag} alt="..." style={{ height: "50px", width: "50px"  }} />
             </IconButton>
           </Tooltip>
+          }
+          
           <img src={props.fleur.image} className="card-image" alt="..." />
 
           <div className="card-body">
