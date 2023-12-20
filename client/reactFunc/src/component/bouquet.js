@@ -8,6 +8,7 @@ import LocalFloristRoundedIcon from "@mui/icons-material/LocalFloristRounded";
 import Tooltip from "@mui/material/Tooltip";
 import BqFlowres from "./BqFlowres";
 import { likeStaticBouquet } from "../fetchFunc/fetchBouquet";
+import { Link } from "react-router-dom";
 const Bouquet = (props) => {
   const [B, setB] = useState(props.bouquet);
   const [like, setlike] = useState(false);
@@ -50,8 +51,11 @@ const Bouquet = (props) => {
   };
   return (
     <>
-      <div className="card ">
-        <img src={props.bouquet.image} className="card-image" alt="..." />
+      <div className="card cardform">
+      
+         <img src={props.bouquet.image} className="card-image" alt="..."/>
+        
+       
         <Tooltip
           title={<BqFlowres Fleurs={props.bouquet.Fleurs}/>}
           placement="right-end"
@@ -65,7 +69,7 @@ const Bouquet = (props) => {
         </Tooltip>
         <div className="card-body">
           <h5 className="card-title">{props.bouquet.nom}</h5>
-          <p className="card-text">{props.bouquet.descr}</p>
+          <p className="card-text">{props.bouquet.LikesCount} likes</p>
           <div className="d-flex justify-content-between align-items-end">
             <h5 className="col-md-6">prix: {props.bouquet.prix}</h5>
 
@@ -81,22 +85,9 @@ const Bouquet = (props) => {
               )}
 
               <IconButton onClick={handleLike}>
-                {like ? (
-                  <>
-                    <Badge
-                     badgeContent={
-                      <div className=" nbLike"
-                      > +{B.LikesCount }</div>
-                    }
-                      anchorOrigin={{
-                        vertical: 'top',
-                        horizontal: 'right',
-                      }}
-                    
-                    >
+                {like ? (   
                       <FavoriteIcon className="likedIcon" />
-                    </Badge>
-                  </>
+                  
                 ) : (
                   <FavoriteBorderIcon className="likeIcon" />
                 )}

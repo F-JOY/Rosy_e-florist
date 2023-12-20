@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import Bouquet from "../component/bouquet";
 import {getDbBouquet} from "../fetchFunc/fetchBouquet";
+
 export default function Bouquets(props) {
 const [bouquets,setBouquets]=useState([]);
 useEffect(() => { 
@@ -19,6 +20,7 @@ useEffect(() => {
         <div className="row">
           {bouquets.map((bouquet) => (
             <div  className="col-lg-4 col-md-4 mb-4 container d-flex justify-content-center align-items-center" >
+              
                <Bouquet bouquet={bouquet} />
             </div>
            

@@ -3,6 +3,7 @@ const path = require("path");
 const app = express();
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const initiateDB=require('./outils/initBD')
 const staticRoutes=require('./routes/staticRoutes')
 const bouquetRouter=require('./routes/bouquetRoutes')
@@ -25,6 +26,7 @@ staticRoutes.forEach(route => {
 ///////////////////////////////////////////////////////////////
 app.use(bodyParser.json());
 app.use(express.json());
+app.use(cookieParser());
 ////////////////////////////////////////////////////////////////////
 app.get("/", (req, res) => {
  // res.sendFile(path.join(__dirname,'../client/views/indexBS.html'))

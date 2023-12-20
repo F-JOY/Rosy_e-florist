@@ -4,17 +4,33 @@ import { state } from "../data/state";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import Badge from "@mui/material/Badge";
 import { IconButton } from "@mui/material";
-import getDBdata from "../request";
+
 import LoginModal from "./LoginModal";
-export default function NavBar({ onLoginClick }) {
+
+import ProfilMenu from "./profilMenu";
+export default function NavBar(props) {
   const [cartItemCount, setCartItemCount] = useState(0);
-  const [userName, setuserName] = useState(localStorage.getItem("userName"));
-  const [isAuthontificated, setisAuthontificated] = useState(localStorage.getItem("isAuthontificated"));
-  
+ const [userData, setuserData] = useState({});
+ const [connect, setconnect] = useState(localStorage.getItem("isAuth"));
+
+  const handleLoginSuccess = () => {
+    console.log('handleloginsuccess')
+    setconnect(true)
+    
+    setuserData(props.userData)
+   
+  };
+  const handledeConnect = () => {
+    setconnect(false)
+    setuserData({})
+  };
   useEffect(() => {
+    console.log('logseccus changed')
+    console.log(props.userData)
     const handleStorageChange = () => {
       const updatedItemCount = JSON.parse(localStorage.getItem("nombre")) || 0;
       setCartItemCount(updatedItemCount);
+      
     };
 
     window.addEventListener("storage", handleStorageChange);
@@ -24,18 +40,8 @@ export default function NavBar({ onLoginClick }) {
     setCartItemCount(storedItemCount);
 
     // Nettoyer l'écouteur d'événements lors du démontage du composant
-    if (isAuthontificated) {
-    
-    }
-  }, [isAuthontificated]);
- 
-  const handleConnect = () => {
-   
-  };
-  const handledeConnect = () => {
-    localStorage.removeItem("userName")
-    localStorage.removeItem("isAuthontificated");
-  };
+  }, [connect,userData]);
+
   return (
     <>
       <div className="bg-color">
@@ -63,7 +69,7 @@ export default function NavBar({ onLoginClick }) {
               {state.navigation.map((nav) => (
                 <li key={nav.id} className="nav-item">
                   <Link to={nav.path} className="nav-link active">
-                    {nav.isCmpt && isAuthontificated ? userName : nav.label}
+                    {nav.isCmpt && connect ? props.userData.nomComplet : nav.label}
                   </Link>
                 </li>
               ))}
@@ -75,26 +81,20 @@ export default function NavBar({ onLoginClick }) {
                 </Badge>
               </IconButton>
             </Link>
-            {!isAuthontificated ? (
+            {!connect ? (
               <button
                 className="btn btn-color my-2 my-sm-0"
                 data-bs-toggle="modal"
                 data-bs-target="#staticBackdrop"
-                onClick={handleConnect}
+               
               >
                 Connexion
               </button>
             ) : (
-              <button
-                className="btn btn-color my-2 my-sm-0 "
-                onClick={handledeConnect}
-              >
-                deconnexion
-              </button>
+              <ProfilMenu handledeConnect={handledeConnect}/>
             )}
           </div>
-
-          <LoginModal />
+         {!connect &&  <LoginModal onLogin={handleLoginSuccess} />}
         </nav>
       </div>
     </>

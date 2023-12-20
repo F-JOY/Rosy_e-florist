@@ -1,38 +1,34 @@
-import React from 'react'
-import Login from '../pages/login'
-import { useState } from "react";
-export default function LoginModal() {
-    
-    const [showLoginForm, setShowLoginForm] = useState(false);
+import React, { useState, useEffect } from 'react';
+import Login from '../pages/login';
 
-    const handleLoginClick = () => {
-      // Toggle the visibility of the login form
-      setShowLoginForm(!showLoginForm);
-    };
+export default function LoginModal(props) {
+  const [showLoginForm, setShowLoginForm] = useState(true);
+
+  useEffect(() => {
+    // If the login is successful, hide the login form
+    if (!showLoginForm) {
+      // Additional actions you want to perform after login
+      // ...
+    }
+  }, [showLoginForm]);
+
+  const handleClose = () => {
+    setShowLoginForm(false);
+  };
+
   return (
-
-    <div
-    className="modal fade"
-    id="staticBackdrop"
-    data-bs-backdrop="static"
-    data-bs-keyboard="false"
-    aria-labelledby="staticBackdropLabel"
-    aria-hidden="true"
-  >
-    <div className="modal-dialog modal-dialog-centered">
-      <div className="modal-content">   
-        <div className="modal-body">
-            <button
-            type="button"
-            className="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
-            <Login onClose={handleLoginClick}/>
+    <div className={`modal ${showLoginForm ? 'fade' : ''}`} id="staticBackdrop" tabIndex="-1">
+      <div className="modal-dialog modal-dialog-centered">
+        <div className="modal-content">
+          <div className="modal-header">
+            <h5 className="modal-title">Connexion</h5>
+          
+          </div>
+          <div className="modal-body">
+            {showLoginForm && <Login onClose={handleClose} onLogin={props.onLogin} />}
+          </div>
         </div>
-       
       </div>
     </div>
-  </div>
-  )
+  );
 }

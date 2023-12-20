@@ -28,11 +28,12 @@ exports.login = asyncHandler(async (req, res, next) => {
       res.status(401).json({ error: 'Identifiants incorrects : Mot de passe Incorrect' });
       return;
     }
-    
+    res.cookie('auth', 'true', { httpOnly: true });
+    res.cookie('nomComplet', user.nomComplet, { httpOnly: true });
+
   const token = user.generateToken();
   res.status(200).json({
-    idUser: user.idUser,
-    login: user.login,
+    auth:true,
     nomComplet: user.nomComplet,
     token,
   });

@@ -1,13 +1,21 @@
 const getDBdata = async (url, method, data, headers) => {
-    const response = await fetch(url, {
-      method,
-      headers,
-      body: data ? JSON.stringify(data) : undefined,
-    });
-   //console.log(data);
-    if (!response.ok) {
-      throw new Error(`Error: ${response}`);
-    }
-    return response.json();
+  const options = {
+    method,
+    headers,
   };
+
+  // Ajoutez le corps seulement si la méthode est différente de GET ou HEAD
+  if (method !== 'GET' && method !== 'HEAD') {
+    options.body = data ? JSON.stringify(data) : undefined;
+  }
+
+  const response = await fetch(url, options);
+
+  if (!response.ok) {
+    throw new Error(`Error: ${response.status} - ${response.statusText}`);
+  }
+
+  return response.json();
+};
+
 export default getDBdata;

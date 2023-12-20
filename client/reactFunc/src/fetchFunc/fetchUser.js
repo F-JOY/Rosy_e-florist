@@ -1,18 +1,33 @@
 import getDBdata from "../request";
 
-export const getUser=async(login,PSW)=>{
+export const handleLogin=async(login,PSW)=>{
     try { 
    
         const dataToSend = { login, PSW }
         const headers = { 'Content-Type': 'application/json' };
         const data = await getDBdata('/api/authentification', 'POSt',dataToSend,headers);
         console.log(data)
-        localStorage.setItem("isAuthontificated",true)
+        localStorage.setItem("isAuthontificated",data.auth)
         localStorage.setItem("userName",data.nomComplet)
         localStorage.setItem("UserToken",data.token)
         return (data);
       } catch (error) {
         throw error;
-        console.error('Error fetching user:', error.message);
+       
       }
+}
+
+export const verifyLoginToken=async()=>{
+  try { 
+    const token=(localStorage.getItem('UserToken'))
+    console.group(token)
+    const headers = { 'Authorization': 'Bearer ' + token };
+    const data = await getDBdata('/api/users/info/token', 'GET',null,headers);
+    console.log(data)
+    return (data);
+  } catch (error) {
+    throw error;
+   
+  }
+ 
 }
