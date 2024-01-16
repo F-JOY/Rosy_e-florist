@@ -27,9 +27,11 @@ function App() {
 
   getBouquet().then(bouquets=>setMesBouquets(bouquets))   
   getFleur().then(fleurs=>setMesFleur(fleurs))
- verifyLoginCookies().then(data=>setuserData(data))
+ 
   //console.log(document.cookie);
    if(document.cookie){
+verifyLoginCookies().then(data=>setuserData(data))
+
     setRole("utilisateur")
    }else{
     setRole('visiteur')

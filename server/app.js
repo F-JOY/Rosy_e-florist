@@ -40,9 +40,7 @@ app.use("/api/Bouquets",bouquetRouter);
 app.use('/api/Fleurs',fleurRouter);
 app.use('/api/Users',userRoutes)
 app.use('/api/authentification',authRouter)
-app.get('/test-cookies', (req, res) => {
-  res.json({ cookies: req.cookies });
-});
+
 app.listen(5000, () => {
   console.log("listen on port " + 5000);
 });

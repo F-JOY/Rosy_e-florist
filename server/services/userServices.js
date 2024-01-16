@@ -1,4 +1,4 @@
-const {Users}= require('../models/models')
+const {Users,Bouquets}= require('../models/models')
 
 
 exports.getAllUsers=async(req,res)=>{
@@ -32,7 +32,14 @@ exports.getUserByLogin=async(req,res)=>{
         res.status(500).json({ error: 'Erreur lors de la récupération de l\'utilisateur depuis la base de données' });
       });
 }
-
+/*****************************************************
+* @Desc   Add Like For Bouquet
+* @Methode  POST 
+* @Route    /api/users/addLike/:id
+* @Param    idbouquets id
+* @Body     No Body
+* @Access Private condition est connecter Token dans le header 
+******************************************************/
 exports.addLike = async (req, res) => {
   try {
     const usr = await Users.findByPk(req.user.id);
@@ -61,7 +68,7 @@ exports.addLike = async (req, res) => {
 /*****************************************************
 * @Desc   DIS Like For Bouquet
 * @Methode  POST 
-* @Route    /api/v1/user/dislike/:id
+* @Route    /api/users/removeLike/:id
 * @Param    idbouquets id
 * @Body     No Body
 * @Access Private condition est connecter Token dans le header 
@@ -97,7 +104,7 @@ exports.removeLike = async (req, res) => {
 /*****************************************************
 * @Desc   GET all bouquets  user liked
 * @Methode  GET 
-* @Route    /api/v1/user/bouquets/
+* @Route    /api/users/bouquets/
 * @Param    NO Param
 * @Body     No Body
 * @Access Private condition est connecter Token dans le header 

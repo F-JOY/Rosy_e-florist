@@ -1,7 +1,9 @@
 const {Bouquets,Fleurs,Users} = require('../models/models')
 const staticBouquet= require('../../Data/bouquets.json')
+const verifyCookie = require("../midelwares/verifyCookies")
 ////////////////SQLite database///////////////
 exports.getDBBouquet=async(req,res)=>{
+  
   try {
     const bouquets = await Bouquets.findAll({
       include: [
@@ -38,6 +40,31 @@ exports.getDBBouquet=async(req,res)=>{
     res.status(500).json({ error: 'Erreur lors de la récupération des bouquets avec fleurs et likes.' });
   }
 }
+//////////////////////////bouquet san detaile/////////////////////////////////////////
+exports.getDBBouquetsansD=async(req,res)=>{
+  try {
+    const bouquets = await Bouquets.findAll({
+      include: [
+        { model: Fleurs, as: 'Fleurs' },
+      ],
+    });
+
+   
+    const bouquetsSansD = await Promise.all(bouquets.map(async (bouquet) => {
+      return {
+        idBouquet: bouquet.idBouquet,
+        nom: bouquet.nom,
+        image: bouquet.image,
+      };
+    }));
+
+    res.status(200).json({  data: bouquetsSansD });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Erreur lors de la récupération des bouquets avec fleurs et likes.' });
+  }
+}
+
 
 /////////////static data//////////////////////////////////
 exports.getStaticBouquet=async(req,res)=>{

@@ -17,7 +17,7 @@ export default function LoginModal(props) {
   };
 
   return (
-    <div className={`modal ${showLoginForm ? 'fade' : ''}`} id="staticBackdrop" tabIndex="-1">
+    <div className={`modal ${showLoginForm ? 'fade' : ''}`} id="staticBackdrop"  data-bs-backdrop="false" tabIndex="-1">
       <div className="modal-dialog modal-dialog-centered">
         <div className="modal-content">
           <div className="modal-header">

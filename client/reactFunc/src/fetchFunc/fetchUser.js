@@ -4,10 +4,11 @@ export const handleLogin=async(login,PSW)=>{
     try { 
    
         const dataToSend = { login, PSW }
+        console.log(PSW);
         const headers = { 'Content-Type': 'application/json' };
         const data = await getDBdata('/api/authentification', 'POSt',dataToSend,headers);
         console.log(data)
-        localStorage.setItem("isAuth",data.auth)
+        //localStorage.setItem("isAuth",data.auth)
         localStorage.setItem("userName",data.nomComplet)
         localStorage.setItem("UserToken",data.token)
         return (data);

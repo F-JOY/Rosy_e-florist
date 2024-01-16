@@ -10,8 +10,11 @@ export default function Home(){
     return(
         <>
     
-     
-      <Slider/> 
+      
+
+              <Slider/>
+      
+ 
         <div className="section-devider"></div>
         <Text/>
         <div className="section-devider"></div>

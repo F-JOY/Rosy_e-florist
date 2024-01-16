@@ -9,7 +9,7 @@ export default function CartItem(props) {
         <img src={bouquet.image} alt={bouquet.nom} className="item-image" />
         <div className='text-center'>
           <h5>{bouquet.nom}</h5>
-          <h6>Prix: ${bouquet.prix}</h6>
+          <h6>Prix: {bouquet.prix}DA</h6>
         </div>
       </div>
      
